@@ -2,7 +2,7 @@ class WaveletMatrix{
     using i64 = int64_t;
 public:
     explicit WaveletMatrix() = default;
-    WaveletMatrix(vector<i64> &_v){ []]ternal_WaveletMatrix(_v);};
+    WaveletMatrix(vector<i64> &_v){ internal_WaveletMatrix(_v);};
     i64 range_freq(i64 L, i64 R, i64 lower, i64 upper){ return internal_range_freq(L, R, upper) - internal_range_freq(L, R, lower);}
     i64 range_Kthmin(i64 L, i64 R, i64 K){ return internal_range_Kthmin_assignXOR(L, R, K, 0);}
     i64 range_Kthmax(i64 L, i64 R, i64 K){ return internal_range_Kthmin_assignXOR(L, R, R - L - K - 1, 0);}
@@ -19,7 +19,7 @@ private:
     void internal_WaveletMatrix(vector<i64> v){
         for(auto &e : v) assert(0 <= e and e < INT64_MAX);
         i64 v_max = *max_element(v.begin(), v.end()) + 1;
-        bitsize = 64 - internal_builtin_clzll(v_max);
+        bitsize = 64 - __builtin_clzll(v_max);
         prefixsize = v.size()+1;
         Matrix.resize(prefixsize * bitsize);
         for(i64 h = bitsize - 1; h >= 0; h--){
@@ -69,5 +69,5 @@ private:
             prefixsize - 1 - Matrix[prefixsize * (h+1) - 1] + Matrix[R + prefixsize * h]
         });
     }
-    //https://judge.yosupo.jp/submission/122235
+    //https://judge.yosupo.jp/submission/166929
 };
